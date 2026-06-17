@@ -95,7 +95,15 @@ function SectionA() {
 //
 // Write PlayerRow here:
 
+function PlayerRow({name, score}){
+  return(
+  <div>
 
+  <h3>{name}</h3>
+  <p>Score: {score}</p>
+  </div>
+  )
+}
 
 function SectionB() {
   // B2.
@@ -109,12 +117,23 @@ function SectionB() {
   // EXPLAIN: What is the advantage of rendering a component inside .map()
   //          compared to mapping to a plain HTML element like <li>?
   //
-  //          answer:
+  //          answer:Using a component inside `.map()` is better because it keeps your code reusable, cleaner, and easier to update.
+
+//Instead of repeating HTML for each item, you reuse one component, so if you change it once, it updates everywhere.
+
 
   return (
     <div>
       <h2>Section B — Lists and Components</h2>
       {/* B2: map PlayerRow components here */}
+      {players.map((player)=>(
+        <PlayerRow 
+        key={player.id} 
+        
+        name ={player.name} 
+        score = {player.score}/>
+
+      ))}
 
     </div>
   )
