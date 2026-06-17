@@ -28,14 +28,14 @@
 function SectionA() {
   // A1.
   // Declare a variable called myName and assign it your first name as a string.
+  const myName = "Zin Min"
   // Declare a variable called myCity and assign it the city you are from.
+  const myCity = "New York"
+  
 
 
   // A2.
-  // Inside the return below, add a <p> tag that displays your name.
-  // Add a second <p> tag that displays your city.
-  // Embed each variable into the JSX rather than typing the value directly.
-  //
+  
   // Hint: How do you embed a JavaScript value inside JSX?
   //      If you don't embed the value correctly,
   //      React treats the text literally and prints the
@@ -48,20 +48,28 @@ function SectionA() {
 
   // A4.
   // Display the number of characters in your name inside a <p> tag.
-
+  
   // A5.
   // Declare a variable and assign it the result of 25 + 17.
+  const sum = 25 + 17;
   // Add a <p> tag that shows both the expression and the computed value on the same line.
   //
   // EXPLAIN: What is JSX? How is it different from plain HTML?
   //          Why do you need curly braces to embed a variable's value?
   //
-  //          answer:
-
+  //          answer:Without them, JSX treats everything as plain text. Curly braces {} tell JSX "evaluate this as JavaScript"
+  //                and insert the result, instead of printing it literally
+    
   return (
     <div>
       <h2>Section A — JSX Basics</h2>
       {/* Your output goes below this line */}
+      
+      <p tag= "myName">My name is {myName}</p>
+      <p tag= "myCity">I live in {myCity}</p>
+      <p>Uppercase of my name : {myName.toUpperCase()}</p>
+      <p>My name has the length of {myName.length}</p>
+      <p>Sum of 25 + 17 is {sum}</p>
 
     </div>
   )
@@ -86,6 +94,16 @@ function SectionA() {
 //     (href="#" is fine — we are not building real links yet)
 //
 // Write PageHeader here:
+// return (
+//   <div>
+//     <h1 >My React App</h1>
+//     <nav>
+//       <a href="#" tag="home">Home</a>
+//       <a href="#" tag="about">About</a>
+//       <a href="#" tag="contact">Contact</a>
+//     </nav>
+//   </div>
+// )
 
 
 // B2.
@@ -93,6 +111,10 @@ function SectionA() {
 // It should return a <footer> element with a <p> that says "2026 TTP".
 //
 // Write PageFooter here:
+//PageFooter
+{/* <footer>
+  <p>2026 TTP</p>
+</footer> */}
 
 
 function SectionB() {
@@ -111,6 +133,15 @@ function SectionB() {
     <div>
       <h2>Section B — Your Own Components</h2>
       {/* Render your components below */}
+      <h1 >My React App</h1>
+      <nav>
+        <a href="#" tag="home">Home</a>
+        <a href="#" tag="about">About</a>
+        <a href="#" tag="contact">Contact</a>
+      </nav>
+      <footer>
+        <p>2026 TTP</p>
+      </footer>
 
     </div>
   )
