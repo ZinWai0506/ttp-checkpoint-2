@@ -25,11 +25,19 @@
 // The StudentBadge component below is hardcoded — it always shows the same text.
 // we will update this soon.
 
-function StudentBadge() {
+function StudentBadge(props) {
   return (
     <div>
-      <h3>Student Name</h3>
-      <p>Grade: 0</p>
+      <h3>{props.studentName}</h3>
+      <p>Grade: {props.grade}</p>
+    </div>
+  )
+}
+function TeacherCard(props){
+  return (
+    <div>
+      <h3>{props.teacherName}</h3>
+      <p>Subject: {props.subject}</p>
     </div>
   )
 }
@@ -58,19 +66,26 @@ function SectionA() {
   //
   // This shows that props work the same way on any component you build.
   //
-  // EXPLAIN: What are props?
-  //          Can you change a prop's value inside the component that receives it?
+  // EXPLAIN: What are props? // Props are inputs passed into a React component from its parent component.
+  //          They let you send data into a component so it can be reused with different values.
+  //          2.Can you change a prop's value inside the component that receives it?
   //          Why or why not?
+  //          No, you cannot change a prop's value inside the component that receives it.
+  //           This is because props are read-only (immutable).
+
   //
   //          answer:
 
   return (
     <div>
       <h2>Section A — Props</h2>
-      <StudentBadge />
+      <StudentBadge studentName = "Zin Min" grade = "A"/>
       {/* A1 + A2: Render two more StudentBadge components here */}
+      <StudentBadge studentName = "Jeffrey" grade = "A"/>
+      <StudentBadge studentName = "Jesse" grade = "B"/>
 
       {/* A3: Render your TeacherCard here */}
+      <TeacherCard teacherName = "Prof.David" subject = "CSC 350"/>
 
     </div>
   )
@@ -100,9 +115,21 @@ function SectionA() {
 //
 // Write PlayerCard here:
 
-
+function PlayerCard(props){
+  let isActive;
+  if (props.status) isActive = "Active"
+  else isActive = "Inactive"
+  return (
+  <div>
+    <h3>Player Name : {props.name}</h3>
+    <p>Score      : {props.score}</p>
+    <p>Active Status : {isActive}</p>
+  </div>
+  )
+}
 
 function SectionB() {
+
   // B2.
   // Render three PlayerCard components with different values.
   // At least one should have isActive as true and one as false.
@@ -112,7 +139,9 @@ function SectionB() {
     <div>
       <h2>Section B — Props with Different Types</h2>
       {/* Render your PlayerCard components here */}
-
+      <PlayerCard name = "Lionel Messi" score = {98} status = {true}/>
+      <PlayerCard name = "Neymar Jr." score = {95} status = {true}/>
+      <PlayerCard name = "Ronaldinho" score = {95} status = {false}/>
     </div>
   )
 }
