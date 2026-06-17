@@ -50,17 +50,32 @@ function SectionA() {
   //          answer:
 
   return (
+    
     <div>
       <h2>Section A — Rendering a List</h2>
       <h3>All Players</h3>
       <ul>
         {/* A1: map players here: */}
+        {players.map((player)=>(
+          <li key = {player.id}>{player.name} - Score : {player.score}</li>
+        ))}
 
       </ul>
 
       {/* A2: filtered list goes here: */}
+      <h3>Score above 30</h3>
+      <ul>
+    {players
+      .filter((player) => player.score > 30)
+      .map((player) => (
+        <li key={player.id}>
+          {player.name} — Score: {player.score}
+        </li>
+      ))}
+  </ul>
 
     </div>
+    
   )
 }
 
