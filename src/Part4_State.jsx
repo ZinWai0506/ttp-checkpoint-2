@@ -370,8 +370,8 @@ function GreetingForm() {
   // F1.
   // Declare a state variable called nameInput, starting as an empty string.
   // Declare a second state variable called greeting, starting as an empty string.
-  const [name,setName] = useState('')
-  const [greet,setGreet] = useState('')
+  const [nameInput, setNameInput] = useState('')
+  const [greeting, setGreeting] = useState('')
 
   // F2.
   // Add a <form> containing a controlled text input wired to nameInput,
@@ -385,15 +385,11 @@ function GreetingForm() {
   //
   // Why: preventDefault() stops the browser's default reload-the-page
   //      behavior, so your state survives the submit.
-  function GreetForm(){
-    const handlesubmit = (event)=>{
-      event.preventDefault()
-      setGreet("Hello" + name)
-      setName(name)
-
-
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setGreeting("Hello, " + nameInput + "!")
   }
+
   // F4.
   // Wire your function from F3 to the form's submit event.
 
@@ -412,17 +408,18 @@ function GreetingForm() {
   return (
     <div>
       {/* F2: form goes here */}
-      <form >
+      <form onSubmit={handleSubmit}>
         <input type="text" 
-        value = {name}
-        placeholder = "my name"
-        onchange = {(e)=>{
-          setName(e.target.value)
+        value={nameInput}
+        placeholder="my name"
+        onChange={(e) => {
+          setNameInput(e.target.value)
         }} />
+        <button type="submit">Submit</button>
       </form>
 
       {/* F5: greeting goes here */}
-      <p>{GreetForm}</p>
+      <p>{greeting}</p>
 
     </div>
   )
