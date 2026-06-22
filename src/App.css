@@ -70,13 +70,13 @@ button {
   margin-right: 8px;
   border: 1px solid #aaa;
   border-radius: 4px;
-  background: #fff;
+  background: #c73636;
   cursor: pointer;
   font-size: 0.95rem;
 }
 
 button:hover {
-  background: #f0f0f0;
+  background: #288a8d;
 }
 
 ul {

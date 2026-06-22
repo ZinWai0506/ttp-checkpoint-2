@@ -60,14 +60,18 @@ function Counter() {
   // When clicked, it should set count back to 0.
   //
   // Test it: click "Add 1" several times, then click "Reset".
-
+  const [count,setCount] = useState(0)
   return (
     <div>
       {/* A1: remove the hardcoded 0 with the state */}
-      <h3>Count: 0</h3>
+      <h3>Count: {count}</h3>
       {/* A2: Add 1 button */}
+      <button onClick={()=>
+        setCount(count+1)
+      }>Add 1</button>
 
       {/* A3: Reset button */}
+      <button onClick={()=> setCount(0)}>Reset</button>
 
     </div>
   )
@@ -123,12 +127,16 @@ function MoodPicker() {
   //          What is actually different between this component and Counter?
   //
   //          answer:
-
+  const [mood,setMood] = useState('neutral')
   return (
     <div>
       {/* B2: three buttons go here */}
+      <button onClick= {()=>setMood('Happy')}>Happy</button>
+      <button onClick= {()=>setMood('Sad')}>Sad</button>
+      <button onClick= {()=>setMood('Excited')}>Excited</button>
 
       {/* B3: mood display goes here */}
+      <p>current mood : {mood}</p>
 
     </div>
   )
@@ -156,6 +164,7 @@ function SectionB() {
 // ------------------------------------------------------------
 
 function NameInput() {
+  const [inputValue, setInputValue] = useState('')
   // C1.
   // Declare a state variable called inputValue. Choose an appropriate initial value.
 
@@ -181,8 +190,22 @@ function NameInput() {
   return (
     <div>
       {/* C2: input goes here */}
+      <input type="text" 
+      placeholder='some text'
+      value = {inputValue}
+      onChange = {(event)=>{
+        console.log(event.target)
+        setInputValue(event.target.value)
+      }}
+      onClick={(event)=>{
+        console.log(event.target)
+        setInputValue('')
+      }}
+      
+      />
 
       {/* C3: display text goes here */}
+      <p>text : {inputValue}</p>
 
     </div>
   )
@@ -211,13 +234,14 @@ function SectionC() {
 function Toggle() {
   // D1.
   // Declare a state variable called isVisible with an initial value of false.
-
+  const [isVisible, setIsVisible] = useState(false)
   // D2.
   // Add a button that toggles isVisible between true and false when clicked.
   // The button label should change based on the current state —
   // one label when the content is visible, a different label when it is not.
   //
   // Hint: you can use a variable above the return to decide what the label should be.
+  const buttonLabel = isVisible ? "Hide message" : "Show message"
 
   // D3.
   // Below the button, render a paragraph that says "Now you see me!" —
@@ -241,8 +265,9 @@ function Toggle() {
   return (
     <div>
       {/* D2: button goes here */}
-
+      <button onClick={() => setIsVisible(!isVisible)}>{buttonLabel}</button>
       {/* D3 / D4: conditional message goes here */}
+      {isVisible ? <p>Now you see me!</p> : <p>I am hidden.</p>}
 
     </div>
   )
@@ -269,15 +294,15 @@ function SectionD() {
 //   function passed down the same way.
 // ------------------------------------------------------------
 
-function LightSwitchButton(/* E3: accept a prop here */) {
+function LightSwitchButton({ onFlip }) {
   // E3.
   // This component should accept one prop — a function.
   // Render a single button. When clicked, it should call that function.
   // Do not declare any state in this component — it doesn't need any.
-
   return (
     <div>
       {/* E3: button goes here */}
+      <button onClick={onFlip}>Flip light</button>
 
     </div>
   )
@@ -286,9 +311,13 @@ function LightSwitchButton(/* E3: accept a prop here */) {
 function LightSwitch() {
   // E1.
   // Declare a state variable called isOn with an initial value of false.
+  const [isOn, setIsOn] = useState(false)
 
   // E2.
   // Write a function that flips isOn to the opposite value.
+  const flipLight = () => {
+    setIsOn(!isOn)
+  }
 
   // E4.
   // Render LightSwitchButton below, passing your flip function from E2
@@ -309,8 +338,10 @@ function LightSwitch() {
   return (
     <div>
       {/* E5: on/off sentence goes here */}
+      <p>the light are : {isOn? 'on' : 'off' }</p>
 
       {/* E4: LightSwitchButton goes here */}
+      <LightSwitchButton onFlip={flipLight} />
 
     </div>
   )
@@ -339,6 +370,8 @@ function GreetingForm() {
   // F1.
   // Declare a state variable called nameInput, starting as an empty string.
   // Declare a second state variable called greeting, starting as an empty string.
+  const [name,setName] = useState('')
+  const [greet,setGreet] = useState('')
 
   // F2.
   // Add a <form> containing a controlled text input wired to nameInput,
@@ -352,7 +385,15 @@ function GreetingForm() {
   //
   // Why: preventDefault() stops the browser's default reload-the-page
   //      behavior, so your state survives the submit.
+  function GreetForm(){
+    const handlesubmit = (event)=>{
+      event.preventDefault()
+      setGreet("Hello" + name)
+      setName(name)
 
+
+    }
+  }
   // F4.
   // Wire your function from F3 to the form's submit event.
 
@@ -371,8 +412,17 @@ function GreetingForm() {
   return (
     <div>
       {/* F2: form goes here */}
+      <form >
+        <input type="text" 
+        value = {name}
+        placeholder = "my name"
+        onchange = {(e)=>{
+          setName(e.target.value)
+        }} />
+      </form>
 
       {/* F5: greeting goes here */}
+      <p>{GreetForm}</p>
 
     </div>
   )
@@ -400,6 +450,7 @@ function SectionF() {
 // ------------------------------------------------------------
 
 function SnackList() {
+  const [snack,setSnack] = useState(['chip' , 'candy' , 'chocalate'])
   // G1.
   // Declare a state variable called snacks, an array starting with two
   // or three snack name strings of your choice.
@@ -427,13 +478,33 @@ function SnackList() {
   //          instead?
   //
   //          answer:
+  // const addP =() =>{
+  //   const newArr = snack.slice()
+  //   newArr.push('pretezels')
+  //   const newArr = snack.map()
+  //   newArr.push('p')
 
+  //   setSnack(newArr)
+  // }
   return (
     <div>
       {/* G2: Add Pretzels button goes here */}
+      <button onClick={()=>setSnack([...snack, 'pretzels'])}>Add Pretzels</button>
 
       {/* G3 / G4: snack list or empty message goes here */}
-
+      { 
+        snack.length === 0 ?
+        'no snack' :
+        snack.map((sn, idx)=> <p key={sn}>
+          {sn}
+          <button onClick={()=> {
+            const newArr = snack.filter(snack => snack !== sn)
+            setSnack(newArr)
+          }}>
+            remove
+          </button>
+        </p>)
+      }
     </div>
   )
 }
